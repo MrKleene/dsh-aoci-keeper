@@ -28,7 +28,7 @@ count and the maintenance command. It never edits the index itself.
 | `repoRoot` | `''` | Absolute repository path. Empty means auto-detect. |
 | `command` | `'aoci'` | AOCI executable. Use an absolute path when the app is launched without the user's `PATH`. |
 | `refreshIntervalMs` | `30000` | Minimum age of the cached check before a background refresh. |
-| `reminderCooldownMs` | `120000` | Minimum gap between two reminders for one repository. |
+| `reminderCooldownMs` | `600000` | Minimum gap between two reminders for one repository. |
 | `minFindings` | `1` | Skip the reminder below this finding count. |
 | `timeoutMs` | `20000` | Kill the check after this long. |
 | `extraArgs` | `[]` | Extra arguments appended to `aoci check`. |

@@ -8,5 +8,5 @@
         command: aoci
         repoRoot: ''
         refreshIntervalMs: 30000
-        reminderCooldownMs: 120000
+        reminderCooldownMs: 600000
         minFindings: 1

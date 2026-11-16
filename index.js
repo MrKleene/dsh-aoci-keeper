@@ -26,7 +26,7 @@ const DEFAULTS = {
   repoRoot: '',
   command: 'aoci',
   refreshIntervalMs: 30_000,
-  reminderCooldownMs: 120_000,
+  reminderCooldownMs: 600_000,
   minFindings: 1,
   timeoutMs: 20_000,
   extraArgs: [],
