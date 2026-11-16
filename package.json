@@ -1,0 +1,42 @@
+{
+  "name": "dsh-aoci-keeper",
+  "version": "0.1.0",
+  "description": "Keeps an AOCI cognition index aligned by surfacing governance findings to the model at the start of a DSH turn.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "locale",
+    "docs",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "aoci",
+    "cognition-index"
+  ],
+  "scripts": {
+    "test": "node --test tests/keeper.test.mjs"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrKleene/dsh-aoci-keeper.git"
+  },
+  "homepage": "https://github.com/MrKleene/dsh-aoci-keeper",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

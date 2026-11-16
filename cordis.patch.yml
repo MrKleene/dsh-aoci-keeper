@@ -1,0 +1,12 @@
+# aoci-keeper bundle: mount the keeper plugin into the profile tree.
+# Edit `config` here (or reinstall the bundle) to change repository or timing.
+- insert:
+    - id: aoci-keeper
+      name: dsh-aoci-keeper
+      config:
+        enabled: true
+        command: aoci
+        repoRoot: ''
+        refreshIntervalMs: 30000
+        reminderCooldownMs: 120000
+        minFindings: 1

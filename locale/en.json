@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "AOCI keeper",
+    "description": "Surfaces AOCI cognition-index findings to the model at the start of a DSH turn.",
+    "detail": "docs/DETAIL.md"
+  }
+}
