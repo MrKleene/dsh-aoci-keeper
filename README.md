@@ -1,5 +1,12 @@
 # AOCI keeper
 
+## Install
+
+```sh
+dsh plugin add dsh-aoci-keeper          # from npm
+dsh plugin add MrKleene/dsh-aoci-keeper # from source
+```
+
 DSH has no configurable stop hook, and AOCI's index maintenance is a model
 action (`aoci_maintain`) rather than a background job. This plugin closes that
 gap: it runs `aoci check` against the session's repository and, while the index
