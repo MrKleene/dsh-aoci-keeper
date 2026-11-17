@@ -1,6 +1,6 @@
 {
   "name": "dsh-aoci-keeper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Keeps an AOCI cognition index aligned by surfacing governance findings to the model at the start of a DSH turn.",
   "type": "module",
   "main": "index.js",
