@@ -1,7 +1,7 @@
 {
   "name": "dsh-aoci-keeper",
-  "version": "0.1.2",
-  "description": "Keeps an AOCI cognition index aligned by surfacing governance findings to the model at the start of a DSH turn.",
+  "version": "0.1.3",
+  "description": "DSH plugin that keeps an AOCI cognition index aligned: runs aoci check against the session repository and reminds the model, once per turn, to maintain the index.",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -23,7 +23,9 @@
     "dsh-plugin",
     "deepseek-harness",
     "aoci",
-    "cognition-index"
+    "cognition-index",
+    "agent-context",
+    "index-drift"
   ],
   "scripts": {
     "test": "node --test tests/keeper.test.mjs"

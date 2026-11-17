@@ -15,6 +15,18 @@ The notice belongs to that step, not to the session log: reopening the session
 shows the conversation without it. No index file, baseline, or session record is
 written by the plugin.
 
+## When it helps, and when it does not
+
+It helps when the repository has an `aoci.txt`, the index is expected to stay
+aligned, and sessions are long enough that source files change faster than the
+index. The reminder is the difference between "the index drifted three days ago"
+and "the index drifted in this turn".
+
+It does not help when there is no index to keep (no `aoci.txt` above the session
+`cwd` and no `repoRoot`), when `aoci` is not installed, or when the user prefers
+to run `aoci check` themselves — the plugin degrades to silence in all three
+cases rather than warning on every turn.
+
 ## Request flow
 
 - `agent/pre-step` is a waterfall. The keeper always calls `next()` first and
@@ -39,3 +51,6 @@ written by the plugin.
 - DSH `0.2.2-rc.3`, macOS arm64: loads from a profile bundle install, runs the
   check against a repository with 84 findings, and adds exactly one notice per
   turn.
+- `node --test tests/keeper.test.mjs`: six cases covering the first silent step,
+  the reminder after a cached finding, one notice per turn, an untouched
+  `reject` decision, a repository without `aoci.txt`, and a missing executable.

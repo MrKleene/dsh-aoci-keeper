@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "AOCI keeper",
-    "description": "Surfaces AOCI cognition-index findings to the model at the start of a DSH turn.",
+    "description": "Keeps an AOCI cognition index from drifting: at the start of each turn the model sees the finding count and the maintenance command.",
     "detail": "docs/DETAIL.md"
   }
 }

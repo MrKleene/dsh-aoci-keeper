@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "AOCI 索引看护",
-    "description": "在 DSH 每轮开始时把 AOCI 认知索引的 finding 数交给模型，避免索引悄悄漂移。",
+    "description": "让 AOCI 认知索引不再悄悄漂移：每轮开始时把 finding 数和维护命令交给模型。",
     "detail": "docs/DETAIL.md"
   }
 }
