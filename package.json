@@ -1,6 +1,6 @@
 {
   "name": "dsh-aoci-keeper",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "DSH plugin that keeps an AOCI cognition index aligned: runs aoci check against the session repository and reminds the model, once per turn, to maintain the index.",
   "type": "module",
   "main": "index.js",
