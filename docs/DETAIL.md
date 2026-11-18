@@ -48,6 +48,10 @@ aligned, and sessions are long enough that source files change faster than the
 index. The reminder is the difference between "the index drifted three days ago"
 and "the index drifted in this turn".
 
+`code_skipped` findings are dropped from the count: they name binaries (icons, installers) that
+`aoci` skips by design, so reminding about them would ask for work that cannot be done. An index whose
+only findings are skipped ones is silent.
+
 It does not help when there is no index to keep (no `aoci.txt` above the session
 `cwd` and no `repoRoot`), when `aoci` is not installed, when the MCP server is not
 registered (the notice would name a tool the model cannot call), or when the user

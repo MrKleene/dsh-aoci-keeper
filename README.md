@@ -137,9 +137,10 @@ It does nothing when `aoci` is missing, no `aoci.txt` is found, or the index is 
    host process `cwd`.
 2. It refreshes `aoci check --json` in the background when the cached result is older than
    `refreshIntervalMs`. A step never waits on the CLI.
-3. If the cached result is not `governance_aligned` and has at least `minFindings` findings, it
-   prepends one user-role notice with the count and the top finding kinds. The notice is scoped to
-   the step, so it is not written to the session log.
+3. If the cached result is not `governance_aligned` and has at least `minFindings` fixable findings,
+   it prepends one user-role notice with the count and the top finding kinds. `code_skipped` findings
+   (binaries the index deliberately cannot describe) are not counted, because the model cannot fix
+   them. The notice is scoped to the step, so it is not written to the session log.
 4. Reminders are limited to one per turn and to one per `reminderCooldownMs` per repository.
 
 ## Configuration

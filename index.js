@@ -119,8 +119,12 @@ function runCheck(repoRoot, config) {
         return
       }
       const findings = Array.isArray(parsed.findings) ? parsed.findings : []
+      // `code_skipped` covers binaries the index deliberately cannot describe (icons, installers).
+      // `aoci check` treats them as non-blocking, so counting them here would nag about work the
+      // model cannot do.
+      const actionable = findings.filter((finding) => finding?.code !== 'code_skipped')
       const byCode = new Map()
-      for (const finding of findings) {
+      for (const finding of actionable) {
         const code = typeof finding?.code === 'string' ? finding.code : 'other'
         byCode.set(code, (byCode.get(code) ?? 0) + 1)
       }
@@ -128,7 +132,7 @@ function runCheck(repoRoot, config) {
         ok: true,
         aligned: parsed.governance_aligned === true && parsed.ok === true,
         structureValid: parsed.structure_valid !== false,
-        count: findings.length,
+        count: actionable.length,
         byCode,
       })
     })
@@ -227,6 +231,8 @@ export function apply(ctx, rawConfig) {
     // Refresh in the background: the current step must never wait on a CLI run.
     if (!entry || Date.now() - entry.at >= config.refreshIntervalMs) void refresh(repoRoot)
     if (!entry?.summary?.ok || entry.summary.aligned) return decision
+    // Nothing the model can fix (only skipped binaries) is not debt worth a turn's attention.
+    if ((entry.summary.count ?? 0) === 0) return decision
     if ((entry.summary.count ?? 0) < config.minFindings) return decision
 
     const mark = lastReminder.get(repoRoot)

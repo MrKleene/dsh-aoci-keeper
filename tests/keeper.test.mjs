@@ -93,3 +93,30 @@ test('a missing executable degrades to silence instead of throwing', async () =>
   }
 })
 
+
+test('skipped binaries are not counted as debt the model can pay', async () => {
+  const repo = makeRepo()
+  const pre = mount({
+    command: resolve(import.meta.dirname, 'fixtures/aoci-stub-skipped.sh'),
+    repoRoot: repo,
+    reminderCooldownMs: 0,
+  })
+  const { decision } = await waitForNotice(pre, repo)
+  const text = decision.messages[0].content[0].text
+  assert.match(text, /findings: 1/)
+  assert.doesNotMatch(text, /skipped/)
+})
+
+test('an aligned index with only skipped findings stays silent', async () => {
+  const repo = makeRepo()
+  const pre = mount({
+    command: resolve(import.meta.dirname, 'fixtures/aoci-stub-aligned-skipped.sh'),
+    repoRoot: repo,
+    reminderCooldownMs: 0,
+  })
+  for (let turn = 1; turn <= 8; turn += 1) {
+    const decision = await pre(payload(repo, turn), async () => enter())
+    assert.equal(decision.messages.length, 0)
+    await new Promise((done) => setTimeout(done, 50))
+  }
+})
