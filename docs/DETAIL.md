@@ -1,5 +1,31 @@
 # AOCI keeper
 
+## Where this sits
+
+The keeper is the last step of an AOCI setup, not the whole of it. It assumes:
+
+- the `aoci` binary is installed at a stable absolute path on the host;
+- the repository already has a governed index (`aoci.txt`, `aoci.meta.txt`, `aoci.code.txt`, `.aoci/`)
+  created by `aoci init` and `aoci scan`;
+- the `aoci-code` MCP server is registered in the DSH profile so the model can actually call
+  `aoci_maintain` and `aoci_update_entry`.
+
+It does not install the binary, initialize a repository, register the MCP server, or create the first
+index. Those are manual steps documented in the README's "Getting AOCI running on DSH first".
+
+## Why the reminder is needed at all
+
+AOCI's own host integration covers Codex (`SessionStart(compact)` plus a compaction prompt, installed
+with `--hooks`), Claude Code (a `PreToolUse` guard), OpenCode, Cursor and Qoder. Every one of those is a
+write to host configuration that AOCI performs for a host it knows. DSH is not in that list, and its
+documentation says so: "Other MCP hosts — connect to the standard stdio server — require manual
+configuration and host-specific validation."
+
+Manual configuration gets the nine tools into the session, but it does not create a trigger. MCP is
+pull: tools exist, and the model has to choose them. In a long task the model chooses them rarely, so
+the index grows stale between sessions. The keeper supplies the missing trigger by making the finding
+count part of the turn's input.
+
 ## What it changes
 
 Only the messages entering a turn. While the repository's AOCI index is
@@ -23,9 +49,10 @@ index. The reminder is the difference between "the index drifted three days ago"
 and "the index drifted in this turn".
 
 It does not help when there is no index to keep (no `aoci.txt` above the session
-`cwd` and no `repoRoot`), when `aoci` is not installed, or when the user prefers
-to run `aoci check` themselves — the plugin degrades to silence in all three
-cases rather than warning on every turn.
+`cwd` and no `repoRoot`), when `aoci` is not installed, when the MCP server is not
+registered (the notice would name a tool the model cannot call), or when the user
+prefers to run `aoci check` themselves — the plugin degrades to silence in all of
+those cases rather than warning on every turn.
 
 ## Request flow
 
