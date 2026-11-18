@@ -30,6 +30,10 @@
   "scripts": {
     "test": "node --test tests/keeper.test.mjs"
   },
+  "engines": {
+    "dsh": ">=0.2.2-rc.3",
+    "node": ">=20"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",

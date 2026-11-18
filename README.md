@@ -35,7 +35,7 @@ dsh plugin add dsh-aoci-keeper          # from npm
 dsh plugin add MrKleene/dsh-aoci-keeper # from source
 ```
 
-Requires DSH `0.2.2-rc.3` or newer and the `aoci` CLI on the host.
+Requires DSH `0.2.2-rc.3` or newer (declared as `engines.dsh`), Node `>=20`, and the `aoci` CLI on the host.
 
 ## How it works
 
